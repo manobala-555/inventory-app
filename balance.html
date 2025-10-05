@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Balance Report</h2>
+<p>Current inventory balance across all locations</p>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Warehouse</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in balance_data %}
+            <tr>
+                <td>{{ item.product_name }} ({{ item.product_id }})</td>
+                <td>{{ item.location_name }} ({{ item.location_id }})</td>
+                <td>{{ item.balance }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% if not balance_data %}
+<div class="alert alert-info">
+    No inventory data available. Please add some product movements.
+</div>
+{% endif %}
+{% endblock %}
